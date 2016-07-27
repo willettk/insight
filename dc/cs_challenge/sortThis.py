@@ -37,7 +37,7 @@ def typeSort(data):
             types.append(0)
         # Digits only
         elif (word[0] == '-' and word[1:].isdigit()) or word.isdigit():
-            digits.append(word)
+            digits.append(int(word))
             types.append(1)
         # Something else
         else:
@@ -53,7 +53,7 @@ def typeSort(data):
 
     # Put the sorted results into the expected order of letters vs. digits
     
-    result = [d.pop() if t else d.popleft() for t in types]
+    result = [str(d.pop()) if t else d.popleft() for t in types]
     
     # Final format is a string separated by <space>s
     
