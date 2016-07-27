@@ -3,7 +3,8 @@ from collections import deque
 
 def read_data(filename):
 
-    # Load as a string from a single line
+    # Load data; format should be a single line which will be loaded as a string
+    
     with open(filename,'r') as f:
         data = f.readline().strip()
 
@@ -19,6 +20,7 @@ def remove_odd_chars(data):
         if not (char.isalpha() or char.isdigit() or char in ('-',' ')):
             dlist.remove(char)
 
+    # Combine all legal characters back into a single string.
     data_stripped = ''.join(dlist)
 
     return data_stripped
@@ -65,6 +67,9 @@ def write_data(data,filename):
         print >> f,data
 
 if __name__ == "__main__":
+    
+    # Run from command line
+    
     try:
         data = read_data(sys.argv[1])
         words_and_numbers = remove_odd_chars(data)
