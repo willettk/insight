@@ -42,16 +42,70 @@ class sortTestCase(unittest.TestCase):
         sortedString = typeSort(lettersNumbersOnly)
         self.assertEqual(sortedString,expectedAnswer)
 
-    def testAllIntegers(self):
-        """Does it work with a very long list spanning all allowable integers?"""
+    def testNegativeIntegers(self):
+        """Does it work with both positive and negative integers?"""
 
-        #testList = [str(999999 - x) for x in range(1999999)]
-        #expectedList = [str(x - 999999) for x in range(1999999)]
         testList = [str(9 - x) for x in range(19)]
         expectedList = [str(x - 9) for x in range(19)]
 
         testString = ' '.join(testList)
         expectedAnswer = ' '.join(expectedList)
+
+        lettersNumbersOnly = removeOddChars(testString)
+        sortedString = typeSort(lettersNumbersOnly)
+        self.assertEqual(sortedString,expectedAnswer)
+
+    def _testAllIntegers(self):
+        """Does it work with a very long list spanning all allowable integers?"""
+
+        testList = [str(999999 - x) for x in range(1999999)]
+        expectedList = [str(x - 999999) for x in range(1999999)]
+
+        testString = ' '.join(testList)
+        expectedAnswer = ' '.join(expectedList)
+
+        lettersNumbersOnly = removeOddChars(testString)
+        sortedString = typeSort(lettersNumbersOnly)
+        self.assertEqual(sortedString,expectedAnswer)
+
+    def testAllSameInteger(self):
+        """Does it work with a list that is just many copies of the same integer?"""
+
+        testList = ["51"]*10
+        expectedList = testList
+
+        testString = ' '.join(testList)
+        expectedAnswer = ' '.join(expectedList)
+
+        lettersNumbersOnly = removeOddChars(testString)
+        sortedString = typeSort(lettersNumbersOnly)
+        self.assertEqual(sortedString,expectedAnswer)
+
+    def testAllSameWord(self):
+        """Does it work with a list that is just many copies of the same word?"""
+
+        testList = ["zrak"]*10
+        expectedList = testList
+
+        testString = ' '.join(testList)
+        expectedAnswer = ' '.join(expectedList)
+
+        lettersNumbersOnly = removeOddChars(testString)
+        sortedString = typeSort(lettersNumbersOnly)
+        self.assertEqual(sortedString,expectedAnswer)
+
+    def testSymbolWord(self):
+        """Does it exit gracefully if it runs into a word that is only symbols?"""
+
+        testString = self.BaseCase + ' $!#'
+
+        self.assertRaises(Exception,removeOddChars(testString))
+
+    def testEmptyLine(self):
+        """Does it exit gracefully if it runs into a word that is only symbols?"""
+
+        testString = ""
+        expectedAnswer = ""
 
         lettersNumbersOnly = removeOddChars(testString)
         sortedString = typeSort(lettersNumbersOnly)
