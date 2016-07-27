@@ -1,7 +1,7 @@
 import sys
 from collections import deque
 
-def read_data(filename):
+def readFile(filename):
 
     # Load data; format should be a single line which will be loaded as a string
     
@@ -10,7 +10,7 @@ def read_data(filename):
 
     return data
 
-def remove_odd_chars(data):
+def removeOddChars(data):
 
     # Remove anything that's not a letter, digit, -, or <space> from string.
     # Assume we don't have to worry about mixed letter/digit words.
@@ -21,11 +21,11 @@ def remove_odd_chars(data):
             dlist.remove(char)
 
     # Combine all legal characters back into a single string.
-    data_stripped = ''.join(dlist)
+    dataStripped = ''.join(dlist)
 
-    return data_stripped
+    return dataStripped
 
-def type_sort(data):
+def typeSort(data):
 
     # Split into words and numbers
     
@@ -57,11 +57,11 @@ def type_sort(data):
     
     # Final format is a string separated by <space>s
     
-    sorted_str = ' '.join(result)
+    sortedString = ' '.join(result)
 
-    return sorted_str
+    return sortedString
 
-def write_data(data,filename):
+def writeFile(data,filename):
     
     with open(filename,'w') as f:
         print >> f,data
@@ -71,10 +71,10 @@ if __name__ == "__main__":
     # Run from command line
     
     try:
-        data = read_data(sys.argv[1])
-        words_and_numbers = remove_odd_chars(data)
-        sorted_str = type_sort(words_and_numbers)
-        write_data(sorted_str,sys.argv[2])
+        data = readFile(sys.argv[1])
+        lettersNumbersOnly = removeOddChars(data)
+        sortedString = typeSort(lettersNumbersOnly)
+        writeFile(sortedString,sys.argv[2])
     except IndexError:
         print "Usage:", "python cs_challenge.py <input_file> <output_file>"
 
