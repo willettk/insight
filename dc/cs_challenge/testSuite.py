@@ -121,6 +121,47 @@ class sortTestCase(unittest.TestCase):
         sortedString = typeSort(lettersNumbersOnly)
         self.assertEqual(sortedString,expectedAnswer)
 
+    def testMinusInWord(self):
+        """Does it handle a minus sign embedded within a word?"""
+
+        testString = "1 cat 3 dog 2 aardvark ze-bra"
+        self.assertRaises(Exception,removeOddChars(testString))
+
+    def testMinusInNumber(self):
+        """Does it handle a minus sign embedded within a number?"""
+
+        testString = "1 cat 3 dog 2 aardvark 50-3"
+        self.assertRaises(Exception,removeOddChars(testString))
+    
+    def testMultipleMinusSignsNumber(self):
+        """Does it handle multiple minus signs at the beginning of a number?"""
+
+        testString = "tea coffee 1 0 ----1"
+        expectedAnswer = "coffee tea -1 0 1"
+
+        lettersNumbersOnly = removeOddChars(testString)
+        sortedString = typeSort(lettersNumbersOnly)
+        self.assertEqual(sortedString,expectedAnswer)
+
+    def testMultipleMinusSignsLetter(self):
+        """Does it handle multiple minus signs at the beginning of a word?"""
+
+        testString = "tea coffee 1 0 ----z-"
+        expectedAnswer = "coffee tea 0 1 z"
+
+        lettersNumbersOnly = removeOddChars(testString)
+        sortedString = typeSort(lettersNumbersOnly)
+        self.assertEqual(sortedString,expectedAnswer)
+
+    def testMinusSignsAfter(self):
+        """Does it handle minus signs at the beginning and after a number?"""
+
+        testString = "tea coffee 1 0 --1-"
+        expectedAnswer = "coffee tea -1 0 1"
+
+        lettersNumbersOnly = removeOddChars(testString)
+        sortedString = typeSort(lettersNumbersOnly)
+        self.assertEqual(sortedString,expectedAnswer)
 
 if __name__ == "__main__":
     unittest.main()

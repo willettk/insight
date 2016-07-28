@@ -25,23 +25,44 @@ def removeOddChars(data):
 
     return dataStripped
 
+def firstDashOnly(word):
+
+    # Remove all dashes in a word unless there's a single example and it's at
+    # the front of the string.
+
+    nDashes = word.count('-')
+    if nDashes > 1 and word[0] == '-':
+        wordOneDashMax = (word[::-1]).replace('-','',nDashes-1)[::-1]
+    else:
+        wordOneDashMax = word
+
+    return wordOneDashMax
+
 def typeSort(data):
 
     # Split into words and numbers
     
     types,digits,letters = [],[],[]
     for word in data.split():
+
+        wordNoDash = word.replace('-','')
+
         # Letters only
         if word.isalpha():
             letters.append(word)
             types.append(0)
+        elif wordNoDash.isalpha():
+            letters.append(wordNoDash)
+            types.append(0)
         # Digits only
-        elif (word[0] == '-' and word[1:].isdigit()) or word.isdigit():
-            digits.append(int(word))
-            types.append(1)
-        # Something else
         else:
-            raise Exception("{} is neither a word nor a legal integer".format(word))
+            wordDigit = firstDashOnly(word)
+            try:
+                wordAsInt = int(wordDigit)
+                digits.append(int(wordAsInt))
+                types.append(1)
+            except ValueError:
+                raise Exception("{} is neither a word nor a legal integer".format(word))
 
     # Sort the results for each type and put them in either end of a deque
     
