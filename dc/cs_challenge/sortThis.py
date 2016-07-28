@@ -16,7 +16,7 @@ def removeOddChars(data):
     # Assume we don't have to worry about mixed letter/digit words.
    
     dlist = list(data)
-    for char in dlist:
+    for char in list(data):
         if not (char.isalpha() or char.isdigit() or char in ('-',' ')):
             dlist.remove(char)
 

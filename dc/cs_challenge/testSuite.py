@@ -1,7 +1,7 @@
 # Test the sortThis program on lots of different cases
 
 import unittest
-from sortThis import removeOddChars,typeSort
+from sortThis import readFile,removeOddChars,typeSort
 
 class sortTestCase(unittest.TestCase):
     """Tests for `sortThis.py`."""
@@ -110,6 +110,17 @@ class sortTestCase(unittest.TestCase):
         lettersNumbersOnly = removeOddChars(testString)
         sortedString = typeSort(lettersNumbersOnly)
         self.assertEqual(sortedString,expectedAnswer)
+
+    def testLoisPathological(self):
+        """Does it handle legal words/numbers embedded in multiple repeating symbols?"""
+
+        testString = "####-1$$$ -1 -1"
+        expectedAnswer = "-1 -1 -1"
+
+        lettersNumbersOnly = removeOddChars(testString)
+        sortedString = typeSort(lettersNumbersOnly)
+        self.assertEqual(sortedString,expectedAnswer)
+
 
 if __name__ == "__main__":
     unittest.main()
